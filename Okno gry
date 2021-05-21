@@ -1,0 +1,31 @@
+import pygame, sys,os
+from pygame.locals import *
+import random
+
+pygame.init()
+#ustawienie etykiety z nazwą gry
+pygame.display.set_caption("Tranquility")
+#ikonka przy nazwie gry
+icon = pygame.image.load('rekin.jpg')
+pygame.display.set_icon(icon)
+#ustawienie wymiarów okna wgranych
+window=pygame.display.set_mode((700,500))
+#plik graficzny, który robi za tło można potem zmienić
+tlo_morze=pygame.image.load('tlo.jpg')
+#pobranie informacji o ekranie-tle
+screen = pygame.display.get_surface()
+#przypisuje moją grafikę tła do określonego miejsca na ekranie
+screen.blit(tlo_morze, (0,0))
+pygame.display.flip()
+
+
+#petla do utrzymywania programu na razie
+def input(events):
+    for event in events:
+        if event.type==QUIT:
+            sys.exit(0)
+        else:
+            print (event)
+
+while True:
+    input(pygame.event.get())
