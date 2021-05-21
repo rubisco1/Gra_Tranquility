@@ -6,7 +6,7 @@ pygame.init()
 #ustawienie etykiety z nazwą gry
 pygame.display.set_caption("Tranquility")
 #ikonka przy nazwie gry
-icon = pygame.image.load('rekin.jpg')
+icon = pygame.image.load('rekin.png')
 pygame.display.set_icon(icon)
 #ustawienie wymiarów okna wgranych
 window=pygame.display.set_mode((700,500))
