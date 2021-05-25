@@ -8,7 +8,7 @@ pygame.init()
 #ustawienie etykiety z nazwą gry
 pygame.display.set_caption("Tranquility")
 #ikonka przy nazwie gry
-icon = pygame.image.load('rekin.png')
+icon = pygame.image.load('rekinmaly.png')
 pygame.display.set_icon(icon)
 #ustawienie wymiarów okna wgranych
 window=pygame.display.set_mode((700,500))
@@ -18,19 +18,50 @@ tlo_morze=pygame.image.load('tlo.jpg')
 screen = pygame.display.get_surface()
 #przypisuje moją grafikę tła do określonego miejsca na ekranie
 screen.blit(tlo_morze, (0,0))
-pygame.display.flip()
-#vackground sound
+
+#muzyczka w tle gry
 mixer.music.load("muzyczka.mp3")
 mixer.music.play(-1) #żeby muzyczka grała w pętli
 
 
-#pytla do utrzymywania programu na razie
-def input(events):
-    for event in events:
-        if event.type==QUIT:
-            sys.exit(0)
-        else:
-            print (event)
+playerImg = pygame.image.load('rekinmaly.png')
 
+# początkowe położenie - oś X i oś Y
+player_on_X = 170
+player_on_Y = 200
+# zmienne potrzebne do ruchu gracza - na osi X i osi Y
+player_move_X = 0
+player_move_Y = 0
+
+# funkcja "rysująca" gracza w oknie gry - w nawiasie lokalizacja gracza
+def player_appear():
+    screen.blit(playerImg, (int(player_on_X), int(player_on_Y)))
+    return player_appear()
+
+# WYNIK - SCORE - wyświetla liczbę punktów w prawym górnym rogu
+global points
+points = 0
+score_font = pygame.font.Font("freesansbold.ttf",20)
+score_on_X = 570
+score_on_Y = 10
+
+def score_text(x,y):
+    score = score_font.render("SCORE: " + str(points), True, (255,255,255))
+    screen.blit(score, (x,y))
+
+#pytla do utrzymywania programu na razie
 while True:
-    input(pygame.event.get())
+    # przywołanie tej funkcji = gracz pojawia się na ekranie
+    screen.blit(playerImg, (int(player_on_X), int(player_on_Y)))
+
+
+    #obsługa zdarzeń - pętla żeby okno się nie zamykało
+    for event in pygame.event.get():
+        if event.type==pygame.QUIT:
+            sys.exit(0)
+
+#wyświetlanie wyniku
+    score_text(score_on_X, score_on_Y)
+# przywołanie tej funkcji = gracz pojawia się na ekranie
+    #screen.blit(playerImg, (int(player_on_X), int(player_on_Y)))
+    pygame.display.flip()
