@@ -25,6 +25,10 @@ mixer.music.load("muzyczka.mp3")
 mixer.music.play(-1) #żeby muzyczka grała w pętli
 
 #wstęp do menu
+def text_format(tekst, textFont, textSize, textColor):
+    newFont = pygame.font.Font(textFont, textSize)
+    newText = newFont.render(message, 0, textColor)
+    return newText
 
 
 playerImg = pygame.image.load('rekinmaly.png')
