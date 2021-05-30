@@ -24,6 +24,8 @@ screen.blit(tlo_morze, (0,0))
 mixer.music.load("muzyczka.mp3")
 mixer.music.play(-1) #żeby muzyczka grała w pętli
 
+#wstęp do menu
+
 
 playerImg = pygame.image.load('rekinmaly.png')
 
