@@ -1,0 +1,33 @@
+#SEND HELP NIE UMIEM PROGRAMOWAC
+
+import pygame, sys,os
+from pygame.locals import *
+from pygame import mixer
+from pygame.locals import (RLEACCEL, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KEYDOWN, QUIT)
+
+import random
+
+def init():
+    rekin.image = util.load_image
+
+class Rekin (pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+
+        screen = pygame.display.get_surface()
+        self.area = screen.get_rect()
+
+        self.image = "rekin.png"
+
+        self.rect = pygame.rect (SCREEN_WIDTH, 0, rekin.image.get_width(), rekin.image.get_height())
+
+        super(Rekin, self).__init()
+        self.surf = pygame.image.load("rekin.png").convert()
+        #self.surf = pygame.Surface((36,36))
+        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.rect = self.surf.get_rect(center = (random.radint(SCREEN_WIDTH), random.radint(0, SCREEN_HEIGHT),))
+        self.speed = random.radint(10, 20)
+    def update(self):
+        self.rect.move_ip(-self.speed, 0)
+        if self.rect.right < 0:
+            self.kill()
