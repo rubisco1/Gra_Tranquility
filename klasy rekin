@@ -7,6 +7,8 @@ from pygame.locals import (RLEACCEL, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KE
 
 import random
 
+klawisze_wcisniete = pygame.key.get_pressed()#to dodałam
+
 def init():
     rekin.image = util.load_image
 
@@ -26,8 +28,13 @@ class Rekin (pygame.sprite.Sprite):
         #self.surf = pygame.Surface((36,36))
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(center = (random.radint(SCREEN_WIDTH), random.radint(0, SCREEN_HEIGHT),))
-        self.speed = random.radint(10, 20)
-    def update(self):
-        self.rect.move_ip(-self.speed, 0)
-        if self.rect.right < 0:
-            self.kill()
+        
+    def update(self, klawisze_wcisniete):#zmieniłam update bo to gracz
+        if klawisze_wcisniete[K_UP]:
+            self.rect.move_ip(0, -5)
+        if klawisze_wcisniete[K_DOWN]:
+            self.rect.move_ip(0, 5)
+        if self.rect.top <= 0:
+            self.rect.top = 0
+        if self.rect.bottom >= SCREEN_HEIGHT:
+            self.rect.bottom = SCREEN_HEIGHT
