@@ -32,3 +32,11 @@ def text_format(message, textFont, textSize, textColor):
     newText = newFont.render(message, "freesansbold.ttf",20, white)
 
     return newText
+    
+    
+def set_gameover(self, message = "Game Over"):
+        self.gameover = True
+        images = []
+        font = util.load_font("Cosmetica", 40) #pygame.font.Font(pygame.font.get_default_font(), 36)
+        height = 0
+        width = 0
