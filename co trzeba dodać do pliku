@@ -6,3 +6,7 @@ SCREEN_HEIGHT = 500
 enemies = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)#player to obiekt klasy Rekin
+
+#do main loopa
+pressed_keys = pygame.key.get_pressed()
+player.update(pressed_keys)#player to obiekt klasy Rekin
