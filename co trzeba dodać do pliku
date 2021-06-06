@@ -18,3 +18,8 @@ if pygame.sprite.spritecollideany(player, enemies):
     # If so, then remove the player and stop the loop
     player.kill()
     running = False
+
+
+
+Dzisiaj Ewa ściągneła cały kod z tutoriala i na jutro to co dzisiaj zrobiłyśmy to my sobie pod to ładnie podstawimy i zobaczymy co działa i ewentualnie
+nie działa i jutro razem nad tym popracujemy
