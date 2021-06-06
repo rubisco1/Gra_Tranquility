@@ -1,0 +1,13 @@
+class Rybka(pygame.sprite.Sprite):
+    def __init__(self):
+        super(Rybka, self).__init__()
+        self.surf = pygame.image.load("blob2.png").convert()
+        #self.surf = pygame.Surface((36,36))
+        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.rect = self.surf.get_rect(center = (random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
+                random.randint(0, SCREEN_HEIGHT),))
+        self.speed = random.randint(3, 7)
+    def update(self):
+        self.rect.move_ip(-self.speed, 0)
+        if self.rect.right < 0:
+            self.kill()
