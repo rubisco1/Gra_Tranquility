@@ -1,0 +1,101 @@
+import pygame, sys,os
+from pygame.locals import *
+from pygame import mixer
+from pygame.locals import (RLEACCEL, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KEYDOWN, QUIT)
+
+import random
+
+pygame.init()
+#ustawienie etykiety z nazwą gry
+pygame.display.set_caption("Tranquility")
+#ikonka przy nazwie gry
+icon = pygame.image.load('rekinmaly.png')
+pygame.display.set_icon(icon)
+#ustawienie wymiarów okna wgranych
+window=pygame.display.set_mode((700,500))
+#plik graficzny, który robi za tło można potem zmienić
+tlo_morze=pygame.image.load('tlo.jpg')
+#pobranie informacji o ekranie-tle
+screen = pygame.display.get_surface()
+#przypisuje moją grafikę tła do określonego miejsca na ekranie
+screen.blit(tlo_morze, (0,0))
+
+#muzyczka w tle gry
+mixer.music.load("muzyczka.mp3")
+mixer.music.play(-1) #żeby muzyczka grała w pętli
+
+#wstęp do menu
+def text_format(tekst, textFont, textSize, textColor):
+    newFont = pygame.font.Font(textFont, textSize)
+    newText = newFont.render(message, 0, textColor)
+    return newText
+    
+white=(255, 255, 255)
+black=(0, 0, 0)
+gray=(50, 50, 50)
+red=(255, 0, 0)
+green=(0, 255, 0)
+blue=(0, 0, 255)
+yellow=(255, 255, 0)
+
+def menu():
+    menu = True
+    selected = "start"
+
+    while menu:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_UP:
+                    selected="start"
+                elif event.key==pygame.K_DOWN:
+                    selected="quit"
+                if event.key==pygame.K_RETURN:
+                    if selected=="start":
+                        print("Start")
+                    if selected=="quit":
+                        pygame.quit()
+                        quit()
+
+
+playerImg = pygame.image.load('rekinmaly.png')
+
+# początkowe położenie - oś X i oś Y
+player_on_X = 170
+player_on_Y = 200
+# zmienne potrzebne do ruchu gracza - na osi X i osi Y
+player_move_X = 0
+player_move_Y = 0
+
+# funkcja "rysująca" gracza w oknie gry - w nawiasie lokalizacja gracza
+def player_appear():
+    screen.blit(playerImg, (int(player_on_X), int(player_on_Y)))
+    return player_appear()
+
+# WYNIK - SCORE - wyświetla liczbę punktów w prawym górnym rogu
+global points
+points = 0
+score_font = pygame.font.Font("freesansbold.ttf",20)
+score_on_X = 570
+score_on_Y = 10
+
+def score_text(x,y):
+    score = score_font.render("SCORE: " + str(points), True, (255,255,255))
+    screen.blit(score, (x,y))
+
+#pytla do utrzymywania programu na razie
+while True:
+    # przywołanie tej funkcji = gracz pojawia się na ekranie
+    screen.blit(playerImg, (int(player_on_X), int(player_on_Y)))
+
+
+    #obsługa zdarzeń - pętla żeby okno się nie zamykało
+    for event in pygame.event.get():
+        if event.type==pygame.QUIT:
+            sys.exit(0)
+
+#wyświetlanie wyniku
+    score_text(score_on_X, score_on_Y)
+    pygame.display.flip()
