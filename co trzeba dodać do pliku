@@ -10,3 +10,11 @@ all_sprites.add(player)#player to obiekt klasy Rekin
 #do main loopa
 pressed_keys = pygame.key.get_pressed()
 player.update(pressed_keys)#player to obiekt klasy Rekin
+enemies.update()
+
+
+# Check if any enemies have collided with the player
+if pygame.sprite.spritecollideany(player, enemies):
+    # If so, then remove the player and stop the loop
+    player.kill()
+    running = False
