@@ -1,0 +1,13 @@
+while True:
+    # przywołanie tej funkcji = gracz pojawia się na ekranie
+    screen.blit(playerImg, (int(player_on_X), int(player_on_Y)))
+
+
+    #obsługa zdarzeń - pętla żeby okno się nie zamykało
+    for event in pygame.event.get():
+        if event.type==pygame.QUIT:
+            sys.exit(0)
+
+#wyświetlanie wyniku
+    score_text(score_on_X, score_on_Y)
+    pygame.display.flip()
