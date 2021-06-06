@@ -6,7 +6,7 @@ class Owoc(pygame.sprite.Sprite):
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(center = (random.randint(700, 600),
                 random.randint(0, 500),))
-        self.speed = random.randint(5, 20)
+        self.speed = random.randint(1, 5)
     def update(self):
         self.rect.move_ip(-self.speed, 0)
         if self.rect.right < 0:
