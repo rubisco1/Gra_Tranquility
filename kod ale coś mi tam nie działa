@@ -105,16 +105,18 @@ class Rekin (pygame.sprite.Sprite):
             enemy.kill()
             score += 1
 
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))#musi być przed inicjacją obiektu
 class Rybka(pygame.sprite.Sprite):
     def __init__(self):
         super(Rybka, self).__init__()
-        self.surf = pygame.image.load("blob2.png").convert()
+        rybki = ["blob2.png", "rybka1.png", "rybka2.png"]
+        wylosowana = random.randint(0, 2)
+        self.surf = pygame.image.load(rybki[wylosowana]).convert()
         #self.surf = pygame.Surface((36,36))
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(center = (random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
                 random.randint(0, SCREEN_HEIGHT),))
-        self.speed = random.randint(3, 7)
-
+        self.speed = random.randint(3, 5)
     def update(self):
         self.rect.move_ip(-self.speed, 0)
         if self.rect.right < 0:
