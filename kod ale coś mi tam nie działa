@@ -139,7 +139,8 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 ADDENEMY = pygame.USEREVENT + 1
 pygame.time.set_timer(ADDENEMY, 250)
 
-# Create our 'player'
+owoc = Owoc()
+przeciwnik = Rybka()
 player = Rekin()
 
 # Create groups to hold enemy sprites, and every sprite
@@ -155,10 +156,17 @@ running = True
 while running:
     for event in pygame.event.get():
         if event.type == KEYDOWN:
-             if event.key == K_ESCAPE:
+            if event.key == K_ESCAPE:
                 running = False
         elif event.type == QUIT:
             running = False
+    screen.fill((0, 0, 0))
+    screen.blit(przeciwnik.surf, przeciwnik.rect)
+    przeciwnik.update()
+    screen.blit(owoc.surf, owoc.rect)
+    owoc.update()
+    pygame.display.flip()
+    FramePerSec.tick(FPS)
 #obsługa zdarzeń - pętla żeby okno się nie zamykało
 
 for event in pygame.event.get():
