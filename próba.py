@@ -15,6 +15,8 @@ SCREEN_HEIGHT = 500
 pygame.display.set_caption("Tranquility")
 icon = pygame.image.load('rekin.png')
 pygame.display.set_icon(icon)
+tlo_morze=pygame.image.load('tlo.jpg')
+screen = pygame.display.get_surface()
 
 class Rekin (pygame.sprite.Sprite):
     def __init__(self):
@@ -114,7 +116,8 @@ while running:
     enemies.update()
 
     # Fill the screen with black
-    screen.fill((0, 0, 0))
+    #screen.fill((0, 0, 0))
+    screen.blit(tlo_morze, (0,0))
 
     # Draw all our sprites
     for entity in all_sprites:
