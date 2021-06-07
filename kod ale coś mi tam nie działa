@@ -5,6 +5,9 @@ from pygame.locals import (RLEACCEL, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KE
 
 import random
 
+FPS = 30
+FramePerSec = pygame.time.Clock()
+
 # Define constants for the screen width and height
 SCREEN_WIDTH = 700
 SCREEN_HEIGHT = 500
