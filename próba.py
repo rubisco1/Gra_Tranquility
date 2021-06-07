@@ -127,6 +127,20 @@ while running:
     #screen.fill((0, 0, 0))
     screen.blit(tlo_morze, (0,0))
 
+    global points
+    points = 0
+    score_font = pygame.font.Font("freesansbold.ttf",20)
+    score_on_X = 570
+    score_on_Y = 10
+
+    def score_text(x,y):
+        score = score_font.render("SCORE: " + str(points), True, (255,255,255))
+        screen.blit(score, (x,y))
+
+     #wyświetlanie wyniku
+    score_text(score_on_X, score_on_Y)
+    pygame.display.flip()
+    
     # Draw all our sprites
     for entity in all_sprites:
         screen.blit(entity.surf, entity.rect)
