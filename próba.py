@@ -12,6 +12,9 @@ FramePerSec = pygame.time.Clock()
 SCREEN_WIDTH = 700
 SCREEN_HEIGHT = 500
 
+pygame.display.set_caption("Tranquility")
+icon = pygame.image.load('rekin.png')
+pygame.display.set_icon(icon)
 
 class Rekin (pygame.sprite.Sprite):
     def __init__(self):
