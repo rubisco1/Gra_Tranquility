@@ -34,6 +34,13 @@ class Rekin (pygame.sprite.Sprite):
             self.rect.top = 0
         if self.rect.bottom >= SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
+            
+     def jem_rybki(self):
+       # Check if any enemies have collided with the player
+        if pygame.sprite.spritecollideany(player, enemies):
+        # If so, then remove the player and stop the loop
+            enemies.kill()
+            score += 1
 
 class Rybka(pygame.sprite.Sprite):
     def __init__(self):
@@ -114,6 +121,7 @@ while running:
 
     # Update the position of our enemies
     enemies.update()
+    player.jem_rybki()
 
     # Fill the screen with black
     #screen.fill((0, 0, 0))
