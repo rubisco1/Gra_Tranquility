@@ -73,6 +73,9 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # menu = pygame_menu.Menu(300, 400, 'Welcome',
 #                        theme=pygame_menu.themes.THEME_BLUE)
 
+# menu.add.text_input("IMIĘ :" ,default = "wpisz swoje imię")
+# menu.add.button("WYJŚCIE", pygame_menu.events.EXIT)
+
 # menu.mainloop(screen)
 
 #muzyczka w tle gry
