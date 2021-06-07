@@ -77,10 +77,10 @@ pygame.init()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-menu = pygame_menu.Menu(300, 400, 'Welcome',
-                       theme=pygame_menu.themes.THEME_BLUE)
+# menu = pygame_menu.Menu(300, 400, 'Welcome',
+#                        theme=pygame_menu.themes.THEME_BLUE)
 
-menu.mainloop(screen)
+# menu.mainloop(screen)
 
 #muzyczka w tle gry
 mixer.music.load("muzyczka.mp3")
