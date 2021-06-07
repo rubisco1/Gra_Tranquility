@@ -1,12 +1,9 @@
-# Import the pygame module
-import pygame
+import pygame, sys,os
+from pygame.locals import *
+from pygame import mixer
+from pygame.locals import (RLEACCEL, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KEYDOWN, QUIT)
 
-# Import random for random numbers
 import random
-
-# Import pygame.locals for easier access to key coordinates
-# Updated to conform to flake8 and black standards
-from pygame.locals import (K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KEYDOWN, QUIT)
 
 # Define constants for the screen width and height
 SCREEN_WIDTH = 700
