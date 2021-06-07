@@ -4,6 +4,7 @@ from pygame.locals import *
 from pygame import mixer
 from pygame.locals import (RLEACCEL, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KEYDOWN, QUIT)
 
+import pygame_menu
 import random
 
 FPS = 60
@@ -75,6 +76,11 @@ class Owoc(pygame.sprite.Sprite):
 pygame.init()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
+menu = pygame_menu.Menu(300, 400, 'Welcome',
+                       theme=pygame_menu.themes.THEME_BLUE)
+
+menu.mainloop(screen)
 
 #muzyczka w tle gry
 mixer.music.load("muzyczka.mp3")
