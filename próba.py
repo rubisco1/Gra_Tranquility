@@ -34,7 +34,13 @@ class Rekin (pygame.sprite.Sprite):
             self.rect.top = 0
         if self.rect.bottom >= SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
-           
+            
+     def jem_rybki(self):
+       # Check if any enemies have collided with the player
+        if pygame.sprite.spritecollideany(player, enemies):
+        # If so, then remove the player and stop the loop
+            enemies.kill()
+            score += 1
 
 class Rybka(pygame.sprite.Sprite):
     def __init__(self):
@@ -68,8 +74,11 @@ class Owoc(pygame.sprite.Sprite):
 
 pygame.init()
 
-
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
+#muzyczka w tle gry
+mixer.music.load("muzyczka.mp3")
+mixer.music.play(-1) #żeby muzyczka grała w pętli
 
 # Create a custom event for adding a new enemy.
 ADDENEMY = pygame.USEREVENT + 1
@@ -115,7 +124,7 @@ while running:
 
     # Update the position of our enemies
     enemies.update()
-    
+    player.jem_rybki()
 
     # Fill the screen with black
     #screen.fill((0, 0, 0))
@@ -133,7 +142,6 @@ while running:
 
      #wyświetlanie wyniku
     score_text(score_on_X, score_on_Y)
-    pygame.display.flip()
     
     # Draw all our sprites
     for entity in all_sprites:
