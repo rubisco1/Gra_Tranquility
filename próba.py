@@ -123,7 +123,7 @@ while running:
 
     # Update the position of our enemies
     enemies.update()
-    player.jem_rybki()
+   
 
     # Fill the screen with black
     #screen.fill((0, 0, 0))
