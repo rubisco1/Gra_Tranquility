@@ -176,6 +176,21 @@ pygame.display.flip()
 #player_move_X = 0
 #player_move_Y = 0
 
+# WYNIK - SCORE - wyświetla liczbę punktów w prawym górnym rogu
+global points
+points = 0
+score_font = pygame.font.Font("freesansbold.ttf",20)
+score_on_X = 570
+score_on_Y = 10
+
+def score_text(x,y):
+    score = score_font.render("SCORE: " + str(points), True, (255,255,255))
+    screen.blit(score, (x,y))
+    
+ #wyświetlanie wyniku
+score_text(score_on_X, score_on_Y)
+pygame.display.flip()
+
 def player_appear():
     screen.blit(playerImg, (int(player_on_X), int(player_on_Y)))
     return player_appear()
