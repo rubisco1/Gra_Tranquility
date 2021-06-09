@@ -70,6 +70,10 @@ pygame.init()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+#muzyczka w tle gry
+mixer.music.load("muzyczka.mp3")
+mixer.music.play(-1)
+
 # menu = pygame_menu.Menu(300, 400, 'Welcome',
 #                        theme=pygame_menu.themes.THEME_BLUE)
 
@@ -79,8 +83,8 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # menu.mainloop(screen)
 
 #muzyczka w tle gry
-mixer.music.load("muzyczka.mp3")
-mixer.music.play(-1) #żeby muzyczka grała w pętli
+# mixer.music.load("muzyczka.mp3")
+# mixer.music.play(-1) #żeby muzyczka grała w pętli - daję music przed menu żeby jak odpalasz je to też już działało
 
 # Create a custom event for adding a new enemy.
 ADDENEMY = pygame.USEREVENT + 1
