@@ -97,6 +97,9 @@ all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
 
 # Variable to keep our main loop running
+global points
+points = 0
+
 running = True
 
 # Our main loop
@@ -157,7 +160,7 @@ while running:
     for entity in enemies:
         if pygame.sprite.spritecollide(player, enemies, True):
             enemies.remove(entity)
-            point += 1
+            points += 1
 
     # Flip everything to the display
     pygame.display.flip()
