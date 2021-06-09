@@ -49,8 +49,8 @@ class Rybka(pygame.sprite.Sprite):
         self.speed = random.randint(3, 5)
     def update(self):
         self.rect.move_ip(-self.speed, 0)
-        if self.rect.right < 0:
-            self.kill()
+        #if self.rect.right < 0:
+            #self.kill()
 
 class Owoc(pygame.sprite.Sprite):
     def __init__(self):
@@ -132,8 +132,8 @@ while running:
     #screen.fill((0, 0, 0))
     screen.blit(tlo_morze, (0,0))
 
-    global points
-    points = 0
+    #global points
+    #points = 0
     score_font = pygame.font.Font("freesansbold.ttf",20)
     score_on_X = 570
     score_on_Y = 10
@@ -157,6 +157,7 @@ while running:
     for entity in enemies:
         if pygame.sprite.spritecollide(player, enemies, True):
             enemies.remove(entity)
+            point += 1
 
     # Flip everything to the display
     pygame.display.flip()
