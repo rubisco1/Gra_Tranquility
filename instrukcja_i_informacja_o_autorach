@@ -1,0 +1,20 @@
+from tkinter import *
+from tkinter import messagebox
+glowne_okno = Tk()
+def autor():
+    messagebox.showinfo("Informacje o autorze", "Autorami są Patrycja Filicińska, Hania Szreder, Ewa Mika, Wieronika Kowalczyk, Yuliya Tsiplakova")
+def instrukcja():
+    messagebox.showinfo("Instrukcja", "Здесь инструкция к игре")
+def koniec():
+    glowne_okno.quit()
+
+pasek_menu=Menu(glowne_okno)
+pierwsze_menu=Menu(pasek_menu,tearoff=0)
+pierwsze_menu.add_command(label = "Wyjdz", command = koniec)
+pierwsze_menu.add_command(label = "Informacja o autorach", command = autor)
+pasek_menu.add_cascade(label = "Info", menu = pierwsze_menu)
+drugie_menu = Menu(pasek_menu, tearoff = 0)
+drugie_menu.add_command(label = "Pokaz instrukcje", command = instrukcja)
+pasek_menu.add_cascade(label = "Instrukcja", menu = drugie_menu)
+glowne_okno.config(menu = pasek_menu)
+glowne_okno.mainloop()
