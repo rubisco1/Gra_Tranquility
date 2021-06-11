@@ -72,7 +72,7 @@ class Rekin (pygame.sprite.Sprite):
 
 #funkcja, że poruszanie się graczem jest bardziej płynne
 # i jak trzymam klawisz to gracz nadal się porusza
-pygame.key.set_repeat(10,10
+pygame.key.set_repeat(10,10)
 
 class Rybka(pygame.sprite.Sprite):
     def __init__(self):
