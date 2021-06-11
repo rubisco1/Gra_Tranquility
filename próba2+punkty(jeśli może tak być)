@@ -70,6 +70,10 @@ class Rekin (pygame.sprite.Sprite):
         if self.rect.bottom >= SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
 
+#funkcja, że poruszanie się graczem jest bardziej płynne
+# i jak trzymam klawisz to gracz nadal się porusza
+pygame.key.set_repeat(10,10
+
 class Rybka(pygame.sprite.Sprite):
     def __init__(self):
         super(Rybka, self).__init__()
