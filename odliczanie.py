@@ -1,5 +1,6 @@
 #na początku dodałam jeszcze import time
 # odliczanie
+#wersja1
 
 pygame.init()
 
@@ -20,3 +21,11 @@ for x in range(3):
     time.sleep(1)
     count.clear
     count.write("Start!", font=("Arial", 30, 'bold'))
+    
+#wersj2
+
+timer = time.time()
+while True:
+    if time.time()-timer > 0:
+        print("3, 2, 1... START!")
+        break
