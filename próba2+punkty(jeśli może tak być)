@@ -5,6 +5,7 @@ from pygame.locals import (RLEACCEL, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KE
 
 import pygame_menu
 import random
+import time
 
 def menu():
     menu = True
@@ -52,6 +53,13 @@ icon = pygame.image.load('rekin.png')
 pygame.display.set_icon(icon)
 tlo_morze=pygame.image.load('tlo.jpg')
 screen = pygame.display.get_surface()
+
+# odliczanie
+timer = time.time()
+while True:
+    if time.time()-timer > 0:
+        print("3, 2, 1... START!")
+        break
 
 class Rekin (pygame.sprite.Sprite):
     def __init__(self):
