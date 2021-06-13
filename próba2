@@ -81,9 +81,9 @@ class Shark (pygame.sprite.Sprite):
 # smooth moving the player 
 pygame.key.set_repeat(10,10)
 
-class Fish(pygame.sprite.Sprite):
+class Rybka(pygame.sprite.Sprite):
     def __init__(self):
-        super(Fish, self).__init__()
+        super(Rybka, self).__init__()
         rybki = ["blob2.png", "rybka1.png", "rybka2.png"]
         wylosowana = random.randint(0, 2)
         self.surf = pygame.image.load(rybki[wylosowana]).convert()
@@ -98,9 +98,9 @@ class Fish(pygame.sprite.Sprite):
     def speedup(self):
         self.speed = 6
 
-class Fruit(pygame.sprite.Sprite):
+class Owoc(pygame.sprite.Sprite):
     def __init__(self):
-        super(Fruit, self).__init__()
+        super(Owoc, self).__init__()
         self.surf = pygame.image.load("owocek.png").convert()
         #self.surf = pygame.Surface((36,36))
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
@@ -168,9 +168,9 @@ while running:
                 new_enemy = Rybka ()
             elif points == 50 and len (enemies) == 0:
                 new_enemy = Owoc ()
-            enemies.add(new_enemy)
             elif points >50 :
                 new_enemy = Rybka()
+            enemies.add(new_enemy)
             all_sprites.add(new_enemy)
 
     # Get the set of keys pressed and check for user input
