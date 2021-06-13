@@ -185,16 +185,16 @@ pygame.display.flip()
 
 menu.mainloop(screen)
 
-# Create a custom event for adding a new enemy.
+# Custom event for adding an enemy
 ADD_ENEMY = pygame.USEREVENT + 1
-pygame.time.set_timer(ADD_ENEMY, 250) # wartość w nawiasie należy zwiększać w zależności od wydajności komputera
+pygame.time.set_timer(ADD_ENEMY, 250)
 
 # Create our 'player'
 player = Shark()
 
-# Create groups to hold enemy sprites, and every sprite
-# - enemies is used for collision detection and position updates
-# - all_sprites is used for rendering
+#Sprite groups to hold enemies, and every sprite
+#enemies is used for collision detection and position updates
+#all_sprites is used for rendering
 enemies = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
@@ -219,9 +219,9 @@ while running:
         elif event.type == QUIT:
             running = False
 
-        # Should we add a new enemy?
+        # Adding an enemy
         elif event.type == ADD_ENEMY:
-            # Create the new enemy, and add it to our sprite groups
+            # Defining criteria for adding an enemy
             if points >= TARGET_POINTS/2 and points < TARGET_POINTS/2 + 1 and len(enemies) == 0:
                 new_enemy = Fruit()
             elif len(enemies) == 0:
@@ -233,12 +233,11 @@ while running:
     pressed_keys = pygame.key.get_pressed()
     player.update(pressed_keys)
 
-    # Update the position of our enemies
     enemies.update()
     
     screen.blit(sea_background, (0,0))
 
-    # draw all our sprites
+    #draws all spirtes
     for entity in all_sprites:
         screen.blit(entity.surf, entity.rect)
                    
@@ -255,11 +254,10 @@ while running:
         score = score_font.render("SCORE: " + str(points), True, pygame.Color('white'))
         screen.blit(score, (x,y))
 
-    # show the score
+    #show the score
     score_text(score_on_X, score_on_Y)
 
-    # check if any enemies have collided with the player
-    # If so, remove the player and stop the loop
+    #adding points, removing enemies or player
     for entity in enemies:
         if pygame.sprite.spritecollide(player, enemies, True):
             if entity == Fruit:
@@ -285,9 +283,6 @@ while running:
     def score_text(x,y):
         score = score_font.render("SCORE: " + str (points), True, pygame.Color('white'))
         screen.blit(score,(x,y))
-    
-    #showthescore
-    score_text(score_on_X, score_on_Y)
                    
     if points == TARGET_POINTS/2:
         mixer.music.stop()
@@ -297,7 +292,7 @@ while running:
         mixer.music.load("Synapsis.mp3")
         mixer.music.play(-1)
 
-    # Flip everything to the display
+    #Flips everything to the display and adding FPS "border"
     pygame.display.flip()
     FramePerSec.tick(FPS)
      
