@@ -284,7 +284,7 @@ mytheme.title_offset = (140,100)
 mytheme.cursor_color = pygame.Color("pink")
 
 pygame.init()
-screen.blit(myimage, (0,0))
+
 menu = pygame_menu.Menu(700, 700,"Tranquility: Obiad Rekinka",
             theme = mytheme)
 menu.add.text_input("IMIĘ :" , default = "wpisz swoje imię")
