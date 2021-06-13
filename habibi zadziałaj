@@ -8,7 +8,7 @@ import time
 import copy
 import pygame_menu.font
 
-# from tkinter import messagebox
+from tkinter import messagebox
 
 FPS = 60
 FramePerSec = pygame.time.Clock()
