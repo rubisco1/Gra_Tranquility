@@ -4,7 +4,7 @@ glowne_okno = Tk()
 def autor():
     messagebox.showinfo("Informacje o autorze", "Autorami są Patrycja Filicińska, Hania Szreder, Ewa Mika, Wieronika Kowalczyk, Yuliya Tsiplakova")
 def instrukcja():
-    messagebox.showinfo("Instrukcja", "Tu jeszcze powstanie instrukcja za godzinkę")
+    messagebox.showinfo("Instrukcja", "Przemieszczaj się za pomocą sztrałek →,←,↑,↓. Twoim celem jest zdobycie 100 punktów, czyli musisz zjeść 100 rybek. Jeżeli przegapiłeś rybkę, przegrywasz. ")
 def koniec():
     glowne_okno.quit()
 
