@@ -38,7 +38,7 @@ screen.blit(myimage, (0,0))
 menu = pygame_menu.Menu(700, 700,"Tranquility: Obiad Rekinka",
             theme = mytheme)
 menu.add.text_input("IMIĘ :" , default = "wpisz swoje imię")
-menu.add.button("PLAY")
+menu.add.button("PLAY") #tutaj trzebA zmergowac wasze funkcje
 menu.add.button("O AUTORACH")
 menu.add.button("HOW TO PLAY REKINEK")
 menu.add.button("WYJŚCIE", pygame_menu.events.EXIT)
