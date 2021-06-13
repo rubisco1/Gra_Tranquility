@@ -7,6 +7,86 @@ import pygame_menu
 import random
 import time
 
+FPS = 60
+FramePerSec = pygame.time.Clock()
+
+SCREEN_WIDTH = 700
+SCREEN_HEIGHT = 500
+
+class Fish(pygame.sprite.Sprite):
+    def __init__(self):
+        super(Fish, self).__init__()
+        fishes = ["blob2.png", "rybka1.png", "rybka2.png"]
+        random_fish = random.randint(0, 2)
+        self.surf = pygame.image.load(fishes[random_fish]).convert()
+        #self.surf = pygame.Surface((36,36))
+        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.rect = self.surf.get_rect(center = (random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
+                random.randint(0, SCREEN_HEIGHT),))
+        self.speed = 3
+    def update(self):
+        self.rect.move_ip(-self.speed, 0)
+        #if self.rect.right < 0:
+    def speedup(self):
+        self.speed = 6
+
+class Fruit(pygame.sprite.Sprite):
+    def __init__(self):
+        super(Fruit, self).__init__()
+        self.surf = pygame.image.load("owocek.png").convert()
+        #self.surf = pygame.Surface((36,36))
+        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.rect = self.surf.get_rect(center = (random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
+                random.randint(0, SCREEN_HEIGHT),))
+        self.speed = 2
+    def update(self):
+        self.rect.move_ip(-self.speed, 0)   
+
+class Shark (pygame.sprite.Sprite):
+    def __init__(self):
+        super(Shark, self).__init__()
+        self.surf = pygame.image.load("rekin.png").convert()
+        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.rect = self.surf.get_rect(center = (50, 250))
+
+    def update(self, klawisze_wcisniete):
+        if klawisze_wcisniete[K_UP]:
+            self.rect.move_ip(0, -5)
+        if klawisze_wcisniete[K_DOWN]:
+            self.rect.move_ip(0, 5)
+        if self.rect.top <= 0:
+            self.rect.top = 0
+        if self.rect.bottom >= SCREEN_HEIGHT:
+            self.rect.bottom = SCREEN_HEIGHT
+            
+def countdown_delay(init_num):
+# countdown before game start
+   clock = pygame.time.Clock()
+
+   counter, text = init_num, str(init_num).rjust(3)
+   pygame.time.set_timer(pygame.USEREVENT, 1000)
+   counter_font = pygame.font.Font("freesansbold.ttf", 20)
+
+   # countdown loop
+   running = True
+   while running:
+       for event in pygame.event.get():
+           if event.type == pygame.USEREVENT: 
+               counter -= 1
+               text = str(counter).rjust(3) if counter > 0 else 'Start!'
+           if event.type == pygame.QUIT: 
+               running = False
+
+       screen.blit(tlo_morze, (0,0))
+       screen.blit(counter_font.render(text, True, (255, 255, 255)), (SCREEN_WIDTH/2, SCREEN_HEIGHT/2))
+       pygame.display.update()
+       pygame.display.flip()
+       clock.tick(60)
+       if counter == 0:
+           running = False
+
+   pygame.time.delay(1000)
+
 def menu():
     menu = True
     selected = "start"
@@ -42,74 +122,14 @@ def text_format(message, textFont, textSize, textColor):
 
     return newText
 
-FPS = 60
-FramePerSec = pygame.time.Clock()
-
-SCREEN_WIDTH = 700
-SCREEN_HEIGHT = 500
-
 pygame.display.set_caption("Tranquility")
 icon = pygame.image.load('rekin.png')
 pygame.display.set_icon(icon)
 tlo_morze=pygame.image.load('tlo.jpg')
 screen = pygame.display.get_surface()
 
-# countdown
-timer = time.time()
-while True:
-    if time.time()-timer > 0:
-        print("3, 2, 1... START!")
-        break
-
-class Shark (pygame.sprite.Sprite):
-    def __init__(self):
-        super(Shark, self).__init__()
-        self.surf = pygame.image.load("rekin.png").convert()
-        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
-        self.rect = self.surf.get_rect(center = (50, 250))
-
-    def update(self, klawisze_wcisniete):
-        if klawisze_wcisniete[K_UP]:
-            self.rect.move_ip(0, -5)
-        if klawisze_wcisniete[K_DOWN]:
-            self.rect.move_ip(0, 5)
-        if self.rect.top <= 0:
-            self.rect.top = 0
-        if self.rect.bottom >= SCREEN_HEIGHT:
-            self.rect.bottom = SCREEN_HEIGHT
-
 # smooth moving the player 
 pygame.key.set_repeat(10,10)
-
-class Fish(pygame.sprite.Sprite):
-    def __init__(self):
-        super(Fish, self).__init__()
-        fishes = ["blob2.png", "rybka1.png", "rybka2.png"]
-        random_fish = random.randint(0, 2)
-        self.surf = pygame.image.load(fishes[random_fish]).convert()
-        #self.surf = pygame.Surface((36,36))
-        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
-        self.rect = self.surf.get_rect(center = (random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
-                random.randint(0, SCREEN_HEIGHT),))
-        self.speed = 3
-    def update(self):
-        self.rect.move_ip(-self.speed, 0)
-        #if self.rect.right < 0:
-    def speedup(self):
-        self.speed = 6
-
-class Fruit(pygame.sprite.Sprite):
-    def __init__(self):
-        super(Fruit, self).__init__()
-        self.surf = pygame.image.load("owocek.png").convert()
-        #self.surf = pygame.Surface((36,36))
-        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
-        self.rect = self.surf.get_rect(center = (random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
-                random.randint(0, SCREEN_HEIGHT),))
-        self.speed = 2
-    def update(self):
-        self.rect.move_ip(-self.speed, 0)
-        #if self.rect.right < 0:
 
 pygame.init()
 
