@@ -205,7 +205,7 @@ while running:
     # If so, remove the player and stop the loop
     for entity in enemies:
         if pygame.sprite.spritecollide(player, enemies, True):
-            if entity == fruit:
+            if entity == Fruit:
                 points +=50 
             else:
                 enemies.remove (entity)
