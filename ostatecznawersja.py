@@ -5,6 +5,8 @@ from pygame.locals import (RLEACCEL, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KE
 import pygame_menu
 import random
 import time
+import copy 
+import pygame_menu.font
 
 FPS = 60
 FramePerSec = pygame.time.Clock()
