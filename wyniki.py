@@ -1,5 +1,3 @@
-#edytowane
-
 while True:
     for event in pygame.event.get():
         # przechwyć zamknięcie okna
