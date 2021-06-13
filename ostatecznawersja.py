@@ -155,35 +155,7 @@ countdown_delay(DELAY_BEFORE_START)
 mixer.music.load("muzyczka.mp3")
 mixer.music.play(-1) #żeby muzyczka grała w pętli
 
-tlo_morze=pygame.image.load('tlo.jpg')
 
-mytheme = pygame_menu.themes.THEME_SOLARIZED.copy()
-mytheme.title_background_color = (0,0,0)
-
-mytheme.title_font_shadow = True
-mytheme.title_shadow_color = (200,200,200)
-font = pygame_menu.font.FONT_MUNRO
-mytheme.title_font = font
-mytheme.title_font_size = 50
-mytheme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
-mytheme.title_offset = (140,100)
-mytheme.cursor_color = pygame.Color("pink")
-
-pygame.init()
-screen.blit(myimage, (0,0))
-menu = pygame_menu.Menu(700, 700,"Tranquility: Obiad Rekinka",
-            theme = mytheme)
-menu.add.text_input("IMIĘ :" , default = "wpisz swoje imię")
-menu.add.button("PLAY")
-menu.add.button("O AUTORACH")
-menu.add.button("HOW TO PLAY REKINEK")
-menu.add.button("WYJŚCIE", pygame_menu.events.EXIT)
-
-
-pygame.display.update()
-pygame.display.flip() 
-
-menu.mainloop(screen)
 
 # Custom event for adding an enemy
 ADD_ENEMY = pygame.USEREVENT + 1
@@ -298,3 +270,33 @@ def start():
         FramePerSec.tick(FPS)
 
     game_over(is_game_won)
+
+    tlo_morze=pygame.image.load('tlo.jpg')
+
+mytheme = pygame_menu.themes.THEME_SOLARIZED.copy()
+mytheme.title_background_color = (0,0,0)
+
+mytheme.title_font_shadow = True
+mytheme.title_shadow_color = (200,200,200)
+font = pygame_menu.font.FONT_MUNRO
+mytheme.title_font = font
+mytheme.title_font_size = 50
+mytheme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
+mytheme.title_offset = (140,100)
+mytheme.cursor_color = pygame.Color("pink")
+
+pygame.init()
+screen.blit(myimage, (0,0))
+menu = pygame_menu.Menu(700, 700,"Tranquility: Obiad Rekinka",
+            theme = mytheme)
+menu.add.text_input("IMIĘ :" , default = "wpisz swoje imię")
+menu.add.button("PLAY", start)
+menu.add.button("O AUTORACH")
+menu.add.button("HOW TO PLAY REKINEK")
+menu.add.button("WYJŚCIE", pygame_menu.events.EXIT)
+
+
+pygame.display.update()
+pygame.display.flip() 
+
+menu.mainloop(screen)
