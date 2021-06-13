@@ -162,9 +162,15 @@ while running:
 
         # Should we add a new enemy?
         elif event.type == ADDENEMY:
+        
             # Create the new enemy, and add it to our sprite groups
-            new_enemy = Fish()
+            if points < 50 and len(enemies)<1:
+                new_enemy = Rybka ()
+            elif points == 50 and len (enemies) == 0:
+                new_enemy = Owoc ()
             enemies.add(new_enemy)
+            elif points >50 :
+                new_enemy = Rybka()
             all_sprites.add(new_enemy)
 
     # Get the set of keys pressed and check for user input
@@ -199,8 +205,15 @@ while running:
     # If so, remove the player and stop the loop
     for entity in enemies:
         if pygame.sprite.spritecollide(player, enemies, True):
-            enemies.remove(entity)
-            points += 1
+            if entity == owoc:
+                points +=50 
+            else:
+                enemies.remove (entity)
+                entity.kill()
+                points +=1
+        elif entity.rect.left < 0:
+                player.kill()
+                running = False
             
     if points > 50:
         for entity in enemies:
