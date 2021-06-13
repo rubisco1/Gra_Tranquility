@@ -4,7 +4,7 @@ glowne_okno = Tk()
 def autor():
     messagebox.showinfo("Informacje o autorze", "Autorami są Patrycja Filicińska, Hania Szreder, Ewa Mika, Wieronika Kowalczyk, Yuliya Tsiplakova")
 def instrukcja():
-    messagebox.showinfo("Instrukcja", "Здесь инструкция к игре")
+    messagebox.showinfo("Instrukcja", "Tu jeszcze powstanie instrukcja za godzinkę")
 def koniec():
     glowne_okno.quit()
 
