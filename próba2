@@ -225,12 +225,9 @@ while running:
     # If so, remove the player and stop the loop
     for entity in enemies:
         if pygame.sprite.spritecollide(player, enemies, True):
-            if entity == Fruit:
-                points +=50 
-            else:
-                enemies.remove (entity)
-                entity.kill()
-                points +=1
+            enemies.remove (entity)
+            entity.kill()
+            points +=1
         elif entity.rect.left < 0:
                 player.kill()
                 running = False
@@ -238,6 +235,14 @@ while running:
     if points > 50:
         for entity in enemies:
             entity.speedup()
+            
+    if points == 50:
+        mixer.music.stop()
+        mixer.music.unload()
+        
+    if not pygame.mixer.music.get_busy():
+        mixer.music.load("Synapsis.mp3")
+        mixer.music.play(-1)
 
     # Flip everything to the display
     pygame.display.flip()
