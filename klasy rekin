@@ -1,5 +1,3 @@
-#SEND HELP NIE UMIEM PROGRAMOWAC
-
 import pygame, sys,os
 from pygame.locals import *
 from pygame import mixer
@@ -12,7 +10,7 @@ klawisze_wcisniete = pygame.key.get_pressed()#to dodałam
 def init():
     rekin.image = util.load_image
 
-class Rekin (pygame.sprite.Sprite):
+class Shark (pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
 
@@ -23,13 +21,13 @@ class Rekin (pygame.sprite.Sprite):
 
         self.rect = pygame.rect (SCREEN_WIDTH, 0, rekin.image.get_width(), rekin.image.get_height())
 
-        super(Rekin, self).__init()
+        super(Shark, self).__init()
         self.surf = pygame.image.load("rekin.png").convert()
         #self.surf = pygame.Surface((36,36))
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(center = (random.radint(SCREEN_WIDTH), random.radint(0, SCREEN_HEIGHT),))
         
-    def update(self, klawisze_wcisniete):#zmieniłam update bo to gracz
+    def update(self, klawisze_wcisniete):
         if klawisze_wcisniete[K_UP]:
             self.rect.move_ip(0, -5)
         if klawisze_wcisniete[K_DOWN]:
