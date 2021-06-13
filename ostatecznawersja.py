@@ -1,3 +1,4 @@
+
 import pygame, sys, os
 from pygame import mixer
 from pygame.locals import (RLEACCEL, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KEYDOWN, QUIT)
@@ -5,7 +6,7 @@ from pygame.locals import (RLEACCEL, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KE
 import pygame_menu
 import random
 import time
-import copy 
+import copy
 import pygame_menu.font
 
 FPS = 60
@@ -17,9 +18,9 @@ SCREEN_HEIGHT = 700
 PADDING_TOP = 5
 PADDING_BOTTOM = 7
 
-TARGET_POINTS = 100 
+TARGET_POINTS = 100
 
-POINTS_FOR_FISH = 1 
+POINTS_FOR_FISH = 1
 POINTS_FOR_FRUIT = 2
 
 class Fish(pygame.sprite.Sprite):
@@ -72,7 +73,7 @@ class Shark (pygame.sprite.Sprite):
             self.rect.left = 0
         if self.rect.right >= SCREEN_WIDTH:
             self.rect.right = SCREEN_WIDTH
-            
+
 def countdown_delay(init_num, message = 'Start!'):
 # countdown before game start
    clock = pygame.time.Clock()
@@ -85,10 +86,10 @@ def countdown_delay(init_num, message = 'Start!'):
    running = True
    while running:
        for event in pygame.event.get():
-           if event.type == pygame.USEREVENT: 
+           if event.type == pygame.USEREVENT:
                counter -= 1
                counter_text = str(counter).rjust(3) if counter > 0 else message
-           if event.type == pygame.QUIT: 
+           if event.type == pygame.QUIT:
                running = False
 
        screen.blit(sea_background, (0,0))
@@ -120,7 +121,7 @@ def game_over(game_result, message_game_won = 'Win!!!', message_game_lost = 'Gam
                # Was it the Escape key? If so, stop the loop
                if event.key == K_ESCAPE:
                    running = False
-           if event.type == pygame.QUIT: 
+           if event.type == pygame.QUIT:
                running = False
 
        text = font.render(message, True, pygame.Color('white'))
@@ -139,13 +140,13 @@ sea_background=pygame.image.load('tlo.jpg')
 sea_background=pygame.transform.scale(sea_background,(SCREEN_WIDTH, SCREEN_HEIGHT))
 screen = pygame.display.get_surface()
 
-# smooth moving the player 
+# smooth moving the player
 pygame.key.set_repeat(10,10)
 
 pygame.init()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-                   
+
 #to give player time being ready
 countdown_delay(DELAY_BEFORE_START)
 
@@ -175,103 +176,99 @@ points = 0
 running = True
 is_game_won = False
 
-# Our main loop
+while running:
+    for event in pygame.event.get():
+        if event.type == KEYDOWN:
+            if event.key == K_ESCAPE:
+                running = False
 
-   while running:
-      # Look at every event in the queue
-       for event in pygame.event.get():
-           # Did the user hit a key?
-           if event.type == KEYDOWN:
-               # Was it the Escape key? If so, stop the loop
-               if event.key == K_ESCAPE:
-                   running = False
 
-           # Did the user click the window close button? If so, stop the loop
-           elif event.type == QUIT:
-               running = False
+        elif event.type == QUIT:
+                running = False
 
-           # Adding an enemy
-           elif event.type == ADD_ENEMY:
-               # Defining criteria for adding an enemy
-               if points >= TARGET_POINTS/2 and points < TARGET_POINTS/2 + 1 and len(enemies) == 0:
-                   new_enemy = Fruit()
-               elif len(enemies) == 0:
-                   new_enemy = Fish()
-               enemies.add(new_enemy)
-               all_sprites.add(new_enemy)
+            # Adding an enemy
+        elif event.type == ADD_ENEMY:
+                # Defining criteria for adding an enemy
+            if points >= TARGET_POINTS/2 and points < TARGET_POINTS/2 + 1 and len(enemies) == 0:
+                    new_enemy = Fruit()
+            elif len(enemies) == 0:
+                    new_enemy = Fish()
+            enemies.add(new_enemy)
+            all_sprites.add(new_enemy)
 
-       # Get the set of keys pressed and check for user input
-       pressed_keys = pygame.key.get_pressed()
-       player.update(pressed_keys)
+        # Get the set of keys pressed and check for user input
+    pressed_keys = pygame.key.get_pressed()
+    player.update(pressed_keys)
 
-       enemies.update()
+    enemies.update()
 
-       screen.blit(sea_background, (0,0))
+    screen.blit(sea_background, (0,0))
 
-       #draws all spirtes
-       for entity in all_sprites:
-           screen.blit(entity.surf, entity.rect)
+    #draws all spirtes
+    for entity in all_sprites:
+        screen.blit(entity.surf, entity.rect)
 
-       if points >= TARGET_POINTS:
-           running = False
-           is_game_won = True
-           continue
+    if points >= TARGET_POINTS:
+        running = False
+        is_game_won = True
+        continue
 
-       score_font = pygame.font.Font("freesansbold.ttf", 20)
-       score_on_X = SCREEN_WIDTH/100 * 80
-       score_on_Y = 10
+    score_font = pygame.font.Font("freesansbold.ttf", 20)
+    score_on_X = SCREEN_WIDTH/100 * 80
+    score_on_Y = 10
 
-       def score_text(x,y):
-           score = score_font.render("SCORE: " + str(points), True, pygame.Color('white'))
-           screen.blit(score, (x,y))
+    def score_text(x,y):
+        score = score_font.render("SCORE: " + str(points), True, pygame.Color('white'))
+        screen.blit(score, (x,y))
 
-       #show the score
-       score_text(score_on_X, score_on_Y)
+    #show the score
+    score_text(score_on_X, score_on_Y)
 
-       #adding points, removing enemies or player
-       for entity in enemies:
-           if pygame.sprite.spritecollide(player, enemies, True):
-               if entity == Fruit:
-                      points += POINTS_FOR_FRUIT
-                      entity.kill()
-                      enemies.remove(entity)
-               else:
-                      enemies.remove(entity)
-                      entity.kill()
-                      points += POINTS_FOR_FISH
-           elif entity.rect.left < 0:
-                   player.kill()
-                   running = False
+    #adding points, removing enemies or player
+    for entity in enemies:
+        if pygame.sprite.spritecollide(player, enemies, True):
+            if entity == Fruit:
+                points += POINTS_FOR_FRUIT
+                entity.kill()
+                enemies.remove(entity)
+            else:
+                enemies.remove(entity)
+                entity.kill()
+                points += POINTS_FOR_FISH
 
-       if points > TARGET_POINTS/2:
-           for entity in enemies:
-               entity.speedup()
+        elif entity.rect.left < 0:
+            player.kill()
+            running = False
 
-       score_font = pygame.font.Font("freesansbold.ttf", 20)
-       score_on_X = SCREEN_WIDTH/100 * 80
-       score_on_Y = 10
+    if points > TARGET_POINTS/2:
+        for entity in enemies:
+            entity.speedup()
 
-       def score_text(x,y):
-           score = score_font.render("SCORE: " + str (points), True, pygame.Color('white'))
-           screen.blit(score,(x,y))
+    score_font = pygame.font.Font("freesansbold.ttf", 20)
+    score_on_X = SCREEN_WIDTH/100 * 80
+    score_on_Y = 10
 
-       if points == TARGET_POINTS/2:
-           mixer.music.stop()
-           mixer.music.unload()
+    def score_text(x,y):
+        score = score_font.render("SCORE: " + str (points), True, pygame.Color('white'))
+        screen.blit(score,(x,y))
 
-       if not pygame.mixer.music.get_busy():
-           mixer.music.load("Synapsis.mp3")
-           mixer.music.play(-1)
+    if points == TARGET_POINTS/2:
+        mixer.music.stop()
+        mixer.music.unload()
 
-       #Flips everything to the display and adding FPS "border"
-       pygame.display.flip()
-       FramePerSec.tick(FPS)
+    if not pygame.mixer.music.get_busy():
+        mixer.music.load("Synapsis.mp3")
+        mixer.music.play(-1)
 
-   game_over(is_game_won)
+    #Flips everything to the display and adding FPS "border"
+    pygame.display.flip()
+    FramePerSec.tick(FPS)
+
+game_over(is_game_won)
 
 tlo_morze=pygame.image.load('tlo.jpg')
 
-mytheme = pygame_menu.themes.THEME_SOLARIZED.copy()
+'''mytheme = pygame_menu.themes.THEME_SOLARIZED.copy()
 mytheme.title_background_color = (0,0,0)
 
 mytheme.title_font_shadow = True
@@ -295,6 +292,6 @@ menu.add.button("WYJŚCIE", pygame_menu.events.EXIT)
 
 
 pygame.display.update()
-pygame.display.flip() 
+pygame.display.flip()
 
-menu.mainloop(screen)
+menu.mainloop(screen)'''
