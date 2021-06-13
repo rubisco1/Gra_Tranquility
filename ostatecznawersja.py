@@ -10,6 +10,7 @@ import time
 FPS = 60
 FramePerSec = pygame.time.Clock()
 
+DELAY_BEFORE_START = 3
 SCREEN_WIDTH = 700
 SCREEN_HEIGHT = 500
 PADDING_TOP = 5
@@ -78,7 +79,7 @@ def countdown_delay(init_num, message = 'Start!'):
 # countdown before game start
    clock = pygame.time.Clock()
 
-   counter, text = init_num, str(init_num).rjust(3)
+   counter, counter_text = init_num, str(init_num).rjust(3)
    pygame.time.set_timer(pygame.USEREVENT, 1000)
    counter_font = pygame.font.Font("freesansbold.ttf", 30)
 
@@ -88,14 +89,14 @@ def countdown_delay(init_num, message = 'Start!'):
        for event in pygame.event.get():
            if event.type == pygame.USEREVENT: 
                counter -= 1
-               text = str(counter).rjust(3) if counter > 0 else message
+               counet_text = str(counter).rjust(3) if counter > 0 else message
            if event.type == pygame.QUIT: 
                running = False
 
        screen.blit(sea_background, (0,0))
        text = counter_font.render(counter_text, True, pygame.Color('white'))
        text_rect = text.get_rect(center=(SCREEN_WIDTH/2, SCREEN_HEIGHT/2))
-       screen.blit(counter_font.render(text, text_rect)
+       screen.blit(text, text_rect)
        pygame.display.update()
        pygame.display.flip()
        clock.tick(60)
@@ -164,8 +165,8 @@ mixer.music.load("muzyczka.mp3")
 mixer.music.play(-1) #żeby muzyczka grała w pętli
 
 # Create a custom event for adding a new enemy.
-ADDENEMY = pygame.USEREVENT + 1
-pygame.time.set_timer(ADDENEMY, 250) # wartość w nawiasie należy zwiększać w zależności od wydajności komputera
+ADD_ENEMY = pygame.USEREVENT + 1
+pygame.time.set_timer(ADD_ENEMY, 250) # wartość w nawiasie należy zwiększać w zależności od wydajności komputera
 
 # Create our 'player'
 player = Shark()
@@ -224,7 +225,11 @@ while running:
         running = False
         is_game_won = True
         continue
-
+        
+    score_font = pygame.font.Font("freesansbold.ttf", 20)
+    score_on_X = SCREEN_WIDTH/100 * 80
+    score_on_Y = 10
+    
     def score_text(x,y):
         score = score_font.render("SCORE: " + str(points), True, (255,255,255))
         screen.blit(score, (x,y))
