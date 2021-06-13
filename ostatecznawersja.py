@@ -35,7 +35,7 @@ class Fish(pygame.sprite.Sprite):
     def update(self):
         self.rect.move_ip(-self.speed, 0)
     def speedup(self):
-        self.speed = 4
+        self.speed = 5
 
 class Fruit(pygame.sprite.Sprite):
     def __init__(self):
@@ -47,8 +47,6 @@ class Fruit(pygame.sprite.Sprite):
         self.speed = 4
     def update(self):
         self.rect.move_ip(-self.speed, 0)
-    def speedup(self):
-        self.speed = 5
 
 class Shark (pygame.sprite.Sprite):
     def __init__(self):
@@ -245,7 +243,7 @@ def start():
                     player.kill()
                     running = False
 
-        if points >= TARGET_POINTS/2 and points <= TARGET_POINTS/2 + 1:
+        if points > TARGET_POINTS/2:
             for entity in enemies:
                 entity.speedup()
 
