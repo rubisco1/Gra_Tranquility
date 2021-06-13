@@ -54,16 +54,16 @@ pygame.display.set_icon(icon)
 tlo_morze=pygame.image.load('tlo.jpg')
 screen = pygame.display.get_surface()
 
-# odliczanie
+# countdown
 timer = time.time()
 while True:
     if time.time()-timer > 0:
         print("3, 2, 1... START!")
         break
 
-class Rekin (pygame.sprite.Sprite):
+class Shark (pygame.sprite.Sprite):
     def __init__(self):
-        super(Rekin, self).__init__()
+        super(Shark, self).__init__()
         self.surf = pygame.image.load("rekin.png").convert()
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(center = (50, 250))
@@ -78,13 +78,12 @@ class Rekin (pygame.sprite.Sprite):
         if self.rect.bottom >= SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
 
-#funkcja, że poruszanie się graczem jest bardziej płynne
-# i jak trzymam klawisz to gracz nadal się porusza
+# smooth moving the player 
 pygame.key.set_repeat(10,10)
 
-class Rybka(pygame.sprite.Sprite):
+class Fish(pygame.sprite.Sprite):
     def __init__(self):
-        super(Rybka, self).__init__()
+        super(Fish, self).__init__()
         rybki = ["blob2.png", "rybka1.png", "rybka2.png"]
         wylosowana = random.randint(0, 2)
         self.surf = pygame.image.load(rybki[wylosowana]).convert()
@@ -96,13 +95,12 @@ class Rybka(pygame.sprite.Sprite):
     def update(self):
         self.rect.move_ip(-self.speed, 0)
         #if self.rect.right < 0:
-            #self.kill()
     def speedup(self):
         self.speed = 6
 
-class Owoc(pygame.sprite.Sprite):
+class Fruit(pygame.sprite.Sprite):
     def __init__(self):
-        super(Owoc, self).__init__()
+        super(Fruit, self).__init__()
         self.surf = pygame.image.load("owocek.png").convert()
         #self.surf = pygame.Surface((36,36))
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
@@ -112,7 +110,6 @@ class Owoc(pygame.sprite.Sprite):
     def update(self):
         self.rect.move_ip(-self.speed, 0)
         #if self.rect.right < 0:
-            #self.kill()
 
 pygame.init()
 
@@ -126,16 +123,16 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # menu.mainloop(screen)
 
-#muzyczka w tle gry
+# music in the background
 mixer.music.load("muzyczka.mp3")
 mixer.music.play(-1) #żeby muzyczka grała w pętli
 
 # Create a custom event for adding a new enemy.
 ADDENEMY = pygame.USEREVENT + 1
-pygame.time.set_timer(ADDENEMY, 250) # tą wartość w nawiasie trzeba zwiększać w zależności od wydajności komputera. np u mnie 1500
+pygame.time.set_timer(ADDENEMY, 250) # wartość w nawiasie należy zwiększać w zależności od wydajności komputera
 
 # Create our 'player'
-player = Rekin()
+player = Shark()
 
 # Create groups to hold enemy sprites, and every sprite
 # - enemies is used for collision detection and position updates
@@ -166,7 +163,7 @@ while running:
         # Should we add a new enemy?
         elif event.type == ADDENEMY:
             # Create the new enemy, and add it to our sprite groups
-            new_enemy = Rybka()
+            new_enemy = Fish()
             enemies.add(new_enemy)
             all_sprites.add(new_enemy)
 
@@ -176,7 +173,6 @@ while running:
 
     # Update the position of our enemies
     enemies.update()
-
 
     # Fill the screen with black
     #screen.fill((0, 0, 0))
@@ -192,18 +188,15 @@ while running:
         score = score_font.render("SCORE: " + str(points), True, (255,255,255))
         screen.blit(score, (x,y))
 
-     #wyświetlanie wyniku
+    # show the score
     score_text(score_on_X, score_on_Y)
 
-    # Draw all our sprites
+    # draw all our sprites
     for entity in all_sprites:
         screen.blit(entity.surf, entity.rect)
 
-    # Check if any enemies have collided with the player
-    #if pygame.sprite.spritecollideany(player, enemies):
-        # If so, remove the player and stop the loop
-        #player.kill()
-        #running = False
+    # check if any enemies have collided with the player
+    # If so, remove the player and stop the loop
     for entity in enemies:
         if pygame.sprite.spritecollide(player, enemies, True):
             enemies.remove(entity)
@@ -228,17 +221,17 @@ pygame.init()
         
 while True:
     for event in pygame.event.get():
-        # przechwyć zamknięcie okna
+        # catch window closing
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
 
-OKNOGRY.fill((0, 0, 0))
+GAMEWINDOW.fill((0, 0, 0))
 rysuj_plansze()
 rysuj_pole_gry()
-if WYGRANA:
-    drukuj_wynik(WYGRANY)
-elif WYGRANA is False:
+if WIN:
+    drukuj_wynik(WIN)
+elif WIN is False:
     print ("Przegrałeś")
 
 pygame.display.update()
