@@ -222,7 +222,7 @@ while running:
         # Should we add a new enemy?
         elif event.type == ADD_ENEMY:
             # Create the new enemy, and add it to our sprite groups
-            if points >= TARGET_POINTS/2 and points <= TARGET_POINTS/2 + 1 and len(enemies) == 0:
+            if points >= TARGET_POINTS/2 and points < TARGET_POINTS/2 + 1 and len(enemies) == 0:
                 new_enemy = Fruit()
             elif len(enemies) == 0:
                 new_enemy = Fish()
