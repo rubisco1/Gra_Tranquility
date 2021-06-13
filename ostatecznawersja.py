@@ -1,5 +1,4 @@
-import pygame, sys,os
-from pygame.locals import *
+import pygame, sys, os
 from pygame import mixer
 from pygame.locals import (RLEACCEL, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KEYDOWN, QUIT)
 
@@ -27,9 +26,9 @@ class Fish(pygame.sprite.Sprite):
         fishes = ["blob2.png", "rybka1.png", "rybka2.png"]
         random_fish = random.randint(0, 2)
         self.surf = pygame.image.load(fishes[random_fish]).convert_alpha()
-        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.surf.set_colorkey(pygame.Color('white'), RLEACCEL)
         self.rect = self.surf.get_rect(center = (random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
-                random.randint(0, SCREEN_HEIGHT),))
+                    random.randint(PADDING_BOTTOM, SCREEN_HEIGHT - PADDING_BOTTOM)))
         self.speed = 3
     def update(self):
         self.rect.move_ip(-self.speed, 0)
@@ -40,11 +39,10 @@ class Fruit(pygame.sprite.Sprite):
     def __init__(self):
         super(Fruit, self).__init__()
         self.surf = pygame.image.load("owocek.png").convert_alpha()
-        #self.surf = pygame.Surface((36,36))
-        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.surf.set_colorkey(pygame.Color('white'), RLEACCEL)
         self.rect = self.surf.get_rect(center = (random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
-                random.randint(0, SCREEN_HEIGHT),))
-        self.speed = 3
+                random.randint(PADDING_TOP, SCREEN_HEIGHT - PADDING_BOTTOM),))
+        self.speed = 4
     def update(self):
         self.rect.move_ip(-self.speed, 0)
     def speedup(self):
@@ -54,7 +52,7 @@ class Shark (pygame.sprite.Sprite):
     def __init__(self):
         super(Shark, self).__init__()
         self.surf = pygame.image.load("rekin.png").convert_alpha()
-        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.surf.set_colorkey(pygame.Color('white'), RLEACCEL)
         self.rect = self.surf.get_rect(center = (50, 250))
 
     def update(self, pressed_button):
@@ -65,7 +63,7 @@ class Shark (pygame.sprite.Sprite):
         if pressed_button[K_RIGHT]:
             self.rect.move_ip(+5,0)
         if pressed_button[K_LEFT]:
-            self.rect.move(-5,0)
+            self.rect.move_ip(-5,0)
         if self.rect.top <= 0:
             self.rect.top = 0
         if self.rect.bottom >= SCREEN_HEIGHT:
@@ -89,7 +87,7 @@ def countdown_delay(init_num, message = 'Start!'):
        for event in pygame.event.get():
            if event.type == pygame.USEREVENT: 
                counter -= 1
-               counet_text = str(counter).rjust(3) if counter > 0 else message
+               counter_text = str(counter).rjust(3) if counter > 0 else message
            if event.type == pygame.QUIT: 
                running = False
 
@@ -103,7 +101,6 @@ def countdown_delay(init_num, message = 'Start!'):
        if counter == 0:
            running = False
 
-   pygame.time.delay(1000)
    pygame.time.delay(1000)
 
 def game_over(game_result, message_game_won = 'Win!!!', message_game_lost = 'Game Over!'):
@@ -231,7 +228,7 @@ while running:
     score_on_Y = 10
     
     def score_text(x,y):
-        score = score_font.render("SCORE: " + str(points), True, (255,255,255))
+        score = score_font.render("SCORE: " + str(points), True, pygame.Color('white'))
         screen.blit(score, (x,y))
 
     # show the score
@@ -268,7 +265,7 @@ while running:
     #showthescore
     score_text(score_on_X, score_on_Y)
                    
-    if points == 50:
+    if points == TARGET_POINTS/2:
         mixer.music.stop()
         mixer.music.unload()
         
