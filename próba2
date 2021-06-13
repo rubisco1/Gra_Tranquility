@@ -81,12 +81,12 @@ class Shark (pygame.sprite.Sprite):
 # smooth moving the player 
 pygame.key.set_repeat(10,10)
 
-class Rybka(pygame.sprite.Sprite):
+class Fish(pygame.sprite.Sprite):
     def __init__(self):
-        super(Rybka, self).__init__()
-        rybki = ["blob2.png", "rybka1.png", "rybka2.png"]
-        wylosowana = random.randint(0, 2)
-        self.surf = pygame.image.load(rybki[wylosowana]).convert()
+        super(Fish, self).__init__()
+        fishes = ["blob2.png", "rybka1.png", "rybka2.png"]
+        random_fish = random.randint(0, 2)
+        self.surf = pygame.image.load(fishes[random_fish]).convert()
         #self.surf = pygame.Surface((36,36))
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(center = (random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
@@ -98,9 +98,9 @@ class Rybka(pygame.sprite.Sprite):
     def speedup(self):
         self.speed = 6
 
-class Owoc(pygame.sprite.Sprite):
+class Fruit(pygame.sprite.Sprite):
     def __init__(self):
-        super(Owoc, self).__init__()
+        super(Fruit, self).__init__()
         self.surf = pygame.image.load("owocek.png").convert()
         #self.surf = pygame.Surface((36,36))
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
@@ -165,11 +165,11 @@ while running:
         
             # Create the new enemy, and add it to our sprite groups
             if points < 50 and len(enemies)<1:
-                new_enemy = Rybka ()
+                new_enemy = Fish ()
             elif points == 50 and len (enemies) == 0:
-                new_enemy = Owoc ()
+                new_enemy = Fruit ()
             elif points >50 :
-                new_enemy = Rybka()
+                new_enemy = Fish()
             enemies.add(new_enemy)
             all_sprites.add(new_enemy)
 
@@ -205,7 +205,7 @@ while running:
     # If so, remove the player and stop the loop
     for entity in enemies:
         if pygame.sprite.spritecollide(player, enemies, True):
-            if entity == owoc:
+            if entity == fruit:
                 points +=50 
             else:
                 enemies.remove (entity)
