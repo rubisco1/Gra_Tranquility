@@ -8,6 +8,8 @@ import time
 import copy 
 import pygame_menu.font
 
+from tkinter import messagebox
+
 FPS = 60
 FramePerSec = pygame.time.Clock()
 
@@ -72,6 +74,12 @@ class Shark (pygame.sprite.Sprite):
             self.rect.left = 0
         if self.rect.right >= SCREEN_WIDTH:
             self.rect.right = SCREEN_WIDTH
+            
+def autor():
+    messagebox.showinfo("Informacje o autorze", "Autorami są Patrycja Filicińska, Hanna Szreder, Ewa Mika, Weronika Kowalczyk, Yuliya Tsiplakova")
+    
+def instrukcja():
+    messagebox.showinfo("Instrukcja", "Przemieszczaj się za pomocą strzałek →,←,↑,↓. Twoim celem jest zdobycie 100 punktów, czyli musisz zjeść 100 rybek")
             
 def countdown_delay(init_num, message = 'Start!'):
 # countdown before game start
@@ -289,8 +297,8 @@ menu = pygame_menu.Menu(700, 700,"Tranquility: Obiad Rekinka",
             theme = mytheme)
 menu.add.text_input("IMIĘ :" , default = "wpisz swoje imię")
 menu.add.button("PLAY", start)
-menu.add.button("O AUTORACH")
-menu.add.button("HOW TO PLAY REKINEK")
+menu.add.button("O AUTORACH", autor)
+menu.add.button("HOW TO PLAY REKINEK", instrukcja)
 menu.add.button("WYJŚCIE", pygame_menu.events.EXIT)
 
 
